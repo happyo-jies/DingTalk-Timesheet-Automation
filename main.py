@@ -9,7 +9,7 @@ _wait = 0.2
 _confidence=0.8
 
 # 1. 获取当前脚本所在的目录
-current_dir = 'D:\Python Project\DingTalk Timesheet Automation\.venv'
+current_dir = 'D:\Myself Project\DingTalk Timesheet Automation\.venv'
 
 # 2. 拼接图片路径
 # 这样写无论你在 Windows 还是 Mac 上都能跑
