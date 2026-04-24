@@ -120,7 +120,7 @@ if __name__ == "__main__":
         # mouse_moveclick("测试")
         mouse_moveclick("Workbench")
         mouse_moveclick("Finalize Timesheet")
-        mouse_moveclick("Refresh",wait=0.5)
+        mouse_moveclick("Refresh",wait=2)
         LoopDo(mouse_moveclick,"Quick Fill")
         LoopDo(mouse_movedrag,"Scrollbar",timeout=2)
         # mouse_moveOffsetclick("working time",0,30)
