@@ -56,6 +56,30 @@ def mouse_movedrag(stepname,wait=_wait,confidence=_confidence):
     time.sleep(wait) # 等待
     return rtb
 
+def mouse_pushscroll(stepname,wait=_wait,confidence=_confidence,scroll_distance=-1000):
+    print(stepname+"开始运行")
+    image_path = os.path.join(current_dir, 'assets', 'images', stepname+'.png')
+    rtb =False
+    #print(image_path)
+    try:
+        save_button_location = pyautogui.locateOnScreen(image_path, confidence=confidence)
+        
+        if save_button_location:
+            x, y = pyautogui.center(save_button_location)
+            print(f"找到“{stepname}”按钮[{x},{y}]，正在拖拽..." )
+            pyautogui.moveTo(x, y)
+            #按住shift键，向下滚动  
+            pyautogui.keyDown('shift')
+            pyautogui.scroll(scroll_distance)
+            pyautogui.keyUp('shift')
+            rtb = True
+        else:
+            print("未找到“"+stepname+"”按钮！")
+    except pyautogui.ImageNotFoundException:
+        print("捕获到异常：屏幕上没有找到指定的图片。")
+    time.sleep(wait) # 等待
+    return rtb
+
 def mouse_moveOffsetclick(stepname,xoffset=0,yoffset=0,wait=_wait,confidence=_confidence):
     print(stepname+"开始运行")
     image_path = os.path.join(current_dir,'assets','images', stepname+'.png')
@@ -119,10 +143,12 @@ if __name__ == "__main__":
         LoopDo(mouse_moveclick,'dingtalk mini',timeout=2)
         # mouse_moveclick("测试")
         mouse_moveclick("Workbench")
+        mouse_moveclick("Work")
         mouse_moveclick("Finalize Timesheet")
-        mouse_moveclick("Refresh",wait=2)
+        # mouse_moveclick("Refresh",wait=2)
         LoopDo(mouse_moveclick,"Quick Fill")
-        LoopDo(mouse_movedrag,"Scrollbar",timeout=2)
+        # LoopDo(mouse_movedrag,"Scrollbar",timeout=2)
+        LoopDo(mouse_pushscroll,"IS2.6",timeout=2)
         # mouse_moveOffsetclick("working time",0,30)
         count = 0
         while count < 7:
